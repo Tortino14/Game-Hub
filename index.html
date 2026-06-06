@@ -1,64 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Game Hub</title>
-<style>
-body {
-  margin: 0;
-  font-family: monospace;
-  background: #111;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}
+  <meta charset="UTF-8">
+  <title>Tortino Games Hub</title>
 
-.container { text-align: center; }
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #1a1a2e, #000);
+      color: white;
+      text-align: center;
+    }
 
-h1 { margin-bottom: 30px; }
+    h1 {
+      margin-top: 40px;
+      font-size: 40px;
+      color: #00fff0;
+      text-shadow: 0 0 10px #00fff0;
+    }
 
-button {
-  display: block;
-  width: 280px;
-  margin: 10px auto;
-  padding: 15px;
-  font-size: 16px;
-  background: #222;
-  color: white;
-  border: 2px solid white;
-  cursor: pointer;
-}
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+    }
 
-button:hover {
-  background: white;
-  color: black;
-}
-</style>
+    .game {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(0,255,240,0.3);
+      border-radius: 15px;
+      width: 250px;
+      margin: 15px;
+      padding: 20px;
+      transition: 0.3s;
+      box-shadow: 0 0 10px rgba(0,255,240,0.1);
+    }
+
+    .game:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(0,255,240,0.5);
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 15px;
+      background: #00fff0;
+      color: black;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    a:hover {
+      background: #00c9c0;
+    }
+
+    p {
+      font-size: 14px;
+      opacity: 0.8;
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="container">
-  <h1>🎮 Tortino Games Hub</h1>
+  <h1>🚀 Tortino Games Hub</h1>
+  <p>Scegli un gioco e divertiti!</p>
 
-  <button onclick="location.href='https://tortino14.github.io/astro-game/'">
-    Astro Game
-  </button>
+  <div class="container">
 
-  <button onclick="location.href='https://tortino14.github.io/astro-doungeon/'">
-    Astro Dungeon
-  </button>
+    <div class="game">
+      <h3>Astro Cow Human Catcher</h3>
+      <p>Prendi le creature e sopravvivi!</p>
+      <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Gioca</a>
+    </div>
 
-  <button onclick="location.href='https://tortino14.github.io/astro-gravity-/'">
-    Astro Gravity
-  </button>
+    <div class="game">
+      <h3>Astro Game</h3>
+      <p>Il tuo gioco principale spaziale</p>
+      <a href="https://tortino14.github.io/astro-game/" target="_blank">Gioca</a>
+    </div>
 
-  <button onclick="location.href='https://tortino14.github.io/Astro---Cow-Human-Catcher/'">
-    Astro Herd
-  </button>
+    <div class="game">
+      <h3>Astro Gravity</h3>
+      <p>Fisica e gravità nello spazio</p>
+      <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Gioca</a>
+    </div>
 
-</div>
+    <div class="game">
+      <h3>Astro Gravity (altro)</h3>
+      <p>Versione alternativa / test</p>
+      <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Gioca</a>
+    </div>
+
+  </div>
 
 </body>
 </html>
