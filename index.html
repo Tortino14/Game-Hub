@@ -2,122 +2,110 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Tortino Games Hub</title>
+<title>Game Hub</title>
 
 <style>
-/* 🌌 BACKGROUND ANIMATO */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background: #0a0a1a;
   color: white;
   text-align: center;
-  background: radial-gradient(circle at top, #1a1a2e, #000);
-  overflow-x: hidden;
 }
 
-/* ⭐ ANIMATED STARS */
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background: transparent url("https://raw.githubusercontent.com/kodewithkaran/particle-animation/main/stars.png");
-  animation: moveStars 60s linear infinite;
-  opacity: 0.2;
+/* TOP BAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #111;
 }
 
-@keyframes moveStars {
-  from {transform: translateY(0);}
-  to {transform: translateY(-1000px);}
-}
-
-/* HEADER */
-h1 {
-  margin-top: 40px;
-  font-size: 40px;
-  color: #00fff0;
-  text-shadow: 0 0 15px #00fff0;
-}
-
-/* RANDOM BUTTON */
-.random-btn {
-  margin-top: 10px;
-  padding: 12px 18px;
+button, select {
+  padding: 8px;
+  border-radius: 6px;
   border: none;
-  border-radius: 10px;
-  background: #00fff0;
-  color: black;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
 }
 
-.random-btn:hover {
-  background: #00c9c0;
-  transform: scale(1.05);
-}
-
-/* GRID (desktop + mobile responsive) */
+/* GRID */
 .container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  padding: 40px;
-  max-width: 900px;
-  margin: auto;
+  padding: 30px;
 }
 
-/* GAME CARD */
+/* CARD */
 .game {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(0,255,240,0.3);
-  border-radius: 15px;
+  background: #1a1a2e;
   padding: 20px;
-  transition: 0.3s;
-  box-shadow: 0 0 10px rgba(0,255,240,0.1);
+  border-radius: 12px;
+  border: 1px solid #333;
   position: relative;
 }
 
-/* HOVER 3D EFFECT */
-.game:hover {
-  transform: scale(1.08) rotateX(5deg) rotateY(5deg);
-  box-shadow: 0 0 25px rgba(0,255,240,0.6);
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: gold;
+  color: black;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 5px;
 }
 
 /* BUTTON */
 a {
   display: inline-block;
   margin-top: 10px;
-  padding: 10px 15px;
-  background: #00fff0;
+  padding: 8px 12px;
+  background: cyan;
   color: black;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-a:hover {
-  background: #00c9c0;
-}
-
-/* MOBILE FIX */
-@media (max-width: 600px) {
-  h1 {font-size: 30px;}
-  .game {padding: 15px;}
+  border-radius: 6px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>🚀 Tortino Games Hub</h1>
+<!-- TOP BAR -->
+<div class="topbar">
+  <div id="title">Game Hub</div>
 
-<button class="random-btn" onclick="playRandom()">🎲 Play Random Game</button>
+  <div>
+    <!-- LANGUAGE -->
+    <select onchange="setLang(this.value)">
+      <option value="en">EN</option>
+      <option value="it">IT</option>
+      <option value="fr">FR</option>
+      <option value="es">ES</option>
+      <option value="ms">MY</option>
+      <option value="zh">中文</option>
+    </select>
+
+    <!-- THEME -->
+    <button onclick="toggleTheme()">Theme</button>
+
+    <!-- SHARE -->
+    <button onclick="shareSite()">Share</button>
+  </div>
+</div>
+
+<h2 id="subtitle">Choose a game</h2>
+
+<button onclick="suggestGame()">🎯 Suggest me a game</button>
+
+<div id="suggest"></div>
 
 <div class="container">
 
   <div class="game">
+    <div class="badge">HOT</div>
     <h3>Astro Cow Human Catcher</h3>
     <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
   </div>
@@ -135,15 +123,47 @@ a:hover {
 </div>
 
 <script>
-const games = [
-  "https://tortino14.github.io/Astro---Cow-Human-Catcher/",
-  "https://tortino14.github.io/astro-game/",
-  "https://tortino14.github.io/astro-gravity-/"
-];
+/* 🌐 TRANSLATIONS */
+const langData = {
+  en: {title:"Game Hub", subtitle:"Choose a game"},
+  it: {title:"Hub Giochi", subtitle:"Scegli un gioco"},
+  fr: {title:"Hub de Jeux", subtitle:"Choisis un jeu"},
+  es: {title:"Centro de Juegos", subtitle:"Elige un juego"},
+  ms: {title:"Hab Permainan", subtitle:"Pilih permainan"},
+  zh: {title:"游戏中心", subtitle:"选择一个游戏"}
+};
 
-function playRandom() {
-  const random = games[Math.floor(Math.random() * games.length)];
-  window.open(random, "_blank");
+function setLang(lang){
+  document.getElementById("title").innerText = langData[lang].title;
+  document.getElementById("subtitle").innerText = langData[lang].subtitle;
+}
+
+/* 🎯 SUGGEST GAME */
+function suggestGame(){
+  const games = ["Astro Cow Human Catcher","Astro Game","Astro Gravity"];
+  const pick = games[Math.floor(Math.random()*games.length)];
+  document.getElementById("suggest").innerText = "👉 Try: " + pick;
+}
+
+/* 🎨 THEME */
+let dark = true;
+function toggleTheme(){
+  if(dark){
+    document.body.style.background = "#f2f2f2";
+    document.body.style.color = "black";
+  } else {
+    document.body.style.background = "#0a0a1a";
+    document.body.style.color = "white";
+  }
+  dark = !dark;
+}
+
+/* 📤 SHARE */
+function shareSite(){
+  navigator.share?.({
+    title: "Game Hub",
+    url: window.location.href
+  }) || alert("Copy link: " + window.location.href);
 }
 </script>
 
