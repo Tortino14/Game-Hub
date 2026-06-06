@@ -1,87 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Tortino Games Hub</title>
+<meta charset="UTF-8">
+<title>Tortino Games Hub</title>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: radial-gradient(circle at top, #1a1a2e, #000);
-      color: white;
-      text-align: center;
-    }
+<style>
+/* 🌌 BACKGROUND ANIMATO */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: white;
+  text-align: center;
+  background: radial-gradient(circle at top, #1a1a2e, #000);
+  overflow-x: hidden;
+}
 
-    h1 {
-      margin-top: 40px;
-      font-size: 40px;
-      color: #00fff0;
-      text-shadow: 0 0 10px #00fff0;
-    }
+/* ⭐ ANIMATED STARS */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background: transparent url("https://raw.githubusercontent.com/kodewithkaran/particle-animation/main/stars.png");
+  animation: moveStars 60s linear infinite;
+  opacity: 0.2;
+}
 
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 40px;
-    }
+@keyframes moveStars {
+  from {transform: translateY(0);}
+  to {transform: translateY(-1000px);}
+}
 
-    .game {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(0,255,240,0.3);
-      border-radius: 15px;
-      width: 250px;
-      margin: 15px;
-      padding: 20px;
-      transition: 0.3s;
-      box-shadow: 0 0 10px rgba(0,255,240,0.1);
-    }
+/* HEADER */
+h1 {
+  margin-top: 40px;
+  font-size: 40px;
+  color: #00fff0;
+  text-shadow: 0 0 15px #00fff0;
+}
 
-    .game:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(0,255,240,0.5);
-    }
+/* RANDOM BUTTON */
+.random-btn {
+  margin-top: 10px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: 10px;
+  background: #00fff0;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
 
-    a {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 10px 15px;
-      background: #00fff0;
-      color: black;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-    }
+.random-btn:hover {
+  background: #00c9c0;
+  transform: scale(1.05);
+}
 
-    a:hover {
-      background: #00c9c0;
-    }
-  </style>
+/* GRID (desktop + mobile responsive) */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 40px;
+  max-width: 900px;
+  margin: auto;
+}
+
+/* GAME CARD */
+.game {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(0,255,240,0.3);
+  border-radius: 15px;
+  padding: 20px;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0,255,240,0.1);
+  position: relative;
+}
+
+/* HOVER 3D EFFECT */
+.game:hover {
+  transform: scale(1.08) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 0 25px rgba(0,255,240,0.6);
+}
+
+/* BUTTON */
+a {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background: #00fff0;
+  color: black;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+a:hover {
+  background: #00c9c0;
+}
+
+/* MOBILE FIX */
+@media (max-width: 600px) {
+  h1 {font-size: 30px;}
+  .game {padding: 15px;}
+}
+</style>
 </head>
 
 <body>
 
-  <h1>🚀 Tortino Games Hub</h1>
+<h1>🚀 Tortino Games Hub</h1>
 
-  <div class="container">
+<button class="random-btn" onclick="playRandom()">🎲 Play Random Game</button>
 
-    <div class="game">
-      <h3>Astro Cow Human Catcher</h3>
-      <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
-    </div>
+<div class="container">
 
-    <div class="game">
-      <h3>Astro Game</h3>
-      <a href="https://tortino14.github.io/astro-game/" target="_blank">Play</a>
-    </div>
-
-    <div class="game">
-      <h3>Astro Gravity</h3>
-      <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Play</a>
-    </div>
-
+  <div class="game">
+    <h3>Astro Cow Human Catcher</h3>
+    <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
   </div>
+
+  <div class="game">
+    <h3>Astro Game</h3>
+    <a href="https://tortino14.github.io/astro-game/" target="_blank">Play</a>
+  </div>
+
+  <div class="game">
+    <h3>Astro Gravity</h3>
+    <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Play</a>
+  </div>
+
+</div>
+
+<script>
+const games = [
+  "https://tortino14.github.io/Astro---Cow-Human-Catcher/",
+  "https://tortino14.github.io/astro-game/",
+  "https://tortino14.github.io/astro-gravity-/"
+];
+
+function playRandom() {
+  const random = games[Math.floor(Math.random() * games.length)];
+  window.open(random, "_blank");
+}
+</script>
 
 </body>
 </html>
