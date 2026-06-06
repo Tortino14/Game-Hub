@@ -2,67 +2,114 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Game Hub</title>
+<title>Tortino Game Launcher</title>
 
 <style>
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #0a0a1a;
-  color: white;
-  text-align: center;
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background: radial-gradient(circle at top,#14142b,#050510);
+  color:white;
+}
+
+/* HEADER */
+header{
+  padding:30px 20px;
+  text-align:center;
+}
+
+h1{
+  margin:0;
+  font-size:42px;
+  color:#00fff0;
+  text-shadow:0 0 15px #00fff0;
+}
+
+/* SEARCH */
+.search{
+  margin-top:15px;
+  padding:10px;
+  width:250px;
+  border-radius:8px;
+  border:none;
 }
 
 /* TOP BAR */
-.topbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: #111;
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 20px;
+  background:#0d0d1a;
 }
 
 /* BUTTONS */
-button {
-  padding: 8px 12px;
-  margin-left: 5px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  background: #00fff0;
-  color: black;
-  font-weight: bold;
+button{
+  padding:8px 12px;
+  border:none;
+  border-radius:6px;
+  background:#00fff0;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
 }
 
-button:hover {
-  background: #00c9c0;
+button:hover{
+  background:#00c9c0;
+}
+
+/* SECTIONS */
+.section{
+  padding:20px;
+}
+
+.section h2{
+  color:#00fff0;
 }
 
 /* GRID */
-.container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  padding: 30px;
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
 }
 
 /* CARD */
-.game {
-  background: #1a1a2e;
-  padding: 20px;
-  border-radius: 12px;
-  border: 1px solid #333;
+.card{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(0,255,240,0.2);
+  border-radius:12px;
+  padding:15px;
+  transition:0.3s;
+  position:relative;
 }
 
-/* LINK */
-a {
-  display: inline-block;
-  margin-top: 10px;
-  padding: 8px 12px;
-  background: cyan;
-  color: black;
-  text-decoration: none;
-  border-radius: 6px;
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px rgba(0,255,240,0.5);
+}
+
+/* BADGES */
+.badge{
+  position:absolute;
+  top:10px;
+  right:10px;
+  background:gold;
+  color:black;
+  padding:3px 7px;
+  font-size:12px;
+  border-radius:5px;
+}
+
+/* PLAY BUTTON */
+a{
+  display:inline-block;
+  margin-top:10px;
+  padding:8px 12px;
+  background:cyan;
+  color:black;
+  text-decoration:none;
+  border-radius:6px;
 }
 </style>
 </head>
@@ -71,79 +118,93 @@ a {
 
 <!-- TOP BAR -->
 <div class="topbar">
-
-  <div id="title">Game Hub</div>
-
+  <div>🎮 Tortino Launcher</div>
   <div>
-    <!-- LANGUAGE BUTTON -->
-    <button onclick="switchLang()">🌐 Language</button>
+    <button onclick="switchLang()">🌐</button>
     <button onclick="shareSite()">Share</button>
   </div>
-
 </div>
 
-<h2 id="subtitle">Choose a game</h2>
+<!-- HEADER -->
+<header>
+  <h1 id="title">Game Hub</h1>
+  <input class="search" id="search" placeholder="Search games..." oninput="filterGames()">
+</header>
 
-<div class="container">
+<!-- FEATURED -->
+<div class="section">
+  <h2>⭐ Featured Game</h2>
 
-  <div class="game">
-    <h3>Astro Cow Human Catcher</h3>
-    <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
+  <div class="grid">
+    <div class="card">
+      <div class="badge">BEST</div>
+      <h3>Astro Game</h3>
+      <a href="https://tortino14.github.io/astro-game/" target="_blank">Play</a>
+    </div>
   </div>
+</div>
 
-  <div class="game">
-    <h3>Astro Game</h3>
-    <a href="https://tortino14.github.io/astro-game/" target="_blank">Play</a>
+<!-- ALL GAMES -->
+<div class="section">
+  <h2>🎮 All Games</h2>
+
+  <div class="grid" id="games">
+
+    <div class="card">
+      <h3>Astro Cow Human Catcher</h3>
+      <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
+    </div>
+
+    <div class="card">
+      <h3>Astro Game</h3>
+      <a href="https://tortino14.github.io/astro-game/" target="_blank">Play</a>
+    </div>
+
+    <div class="card">
+      <h3>Astro Gravity</h3>
+      <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Play</a>
+    </div>
+
   </div>
-
-  <div class="game">
-    <h3>Astro Gravity</h3>
-    <a href="https://tortino14.github.io/astro-gravity-/" target="_blank">Play</a>
-  </div>
-
 </div>
 
 <script>
 
-/* 🌐 LANGUAGES */
-const langs = ["en","it","fr","es","ms","zh"];
-let current = localStorage.getItem("lang") || "en";
+/* 🌐 LANG */
+const langs=["en","it","fr","es","ms","zh"];
+let current="en";
 
-/* TEXTS */
-const data = {
-  en: {title:"Game Hub", subtitle:"Choose a game"},
-  it: {title:"Hub Giochi", subtitle:"Scegli un gioco"},
-  fr: {title:"Hub de Jeux", subtitle:"Choisis un jeu"},
-  es: {title:"Centro de Juegos", subtitle:"Elige un juego"},
-  ms: {title:"Hab Permainan", subtitle:"Pilih permainan"},
-  zh: {title:"游戏中心", subtitle:"选择一个游戏"}
+const data={
+ en:"Game Hub",
+ it:"Hub Giochi",
+ fr:"Hub de Jeux",
+ es:"Centro de Juegos",
+ ms:"Hab Permainan",
+ zh:"游戏中心"
 };
 
-/* APPLY LANGUAGE */
-function applyLang(lang){
-  document.getElementById("title").innerText = data[lang].title;
-  document.getElementById("subtitle").innerText = data[lang].subtitle;
-  localStorage.setItem("lang", lang);
-}
-
-/* SWITCH BUTTON */
 function switchLang(){
-  let index = langs.indexOf(current);
-  index = (index + 1) % langs.length;
-  current = langs[index];
-  applyLang(current);
+ current=langs[(langs.indexOf(current)+1)%langs.length];
+ document.getElementById("title").innerText=data[current];
 }
 
-/* SHARE */
+/* 🔎 SEARCH */
+function filterGames(){
+ let input=document.getElementById("search").value.toLowerCase();
+ let cards=document.querySelectorAll("#games .card");
+
+ cards.forEach(c=>{
+  c.style.display=c.innerText.toLowerCase().includes(input)?"block":"none";
+ });
+}
+
+/* 📤 SHARE */
 function shareSite(){
-  navigator.share?.({
-    title: "Game Hub",
-    url: window.location.href
-  }) || alert("Copy link: " + window.location.href);
+ navigator.share?.({
+  title:"Game Hub",
+  url:window.location.href
+ }) || alert("Copy link: "+window.location.href);
 }
-
-/* LOAD SAVED LANGUAGE */
-applyLang(current);
 
 </script>
 
