@@ -22,11 +22,20 @@ body {
   background: #111;
 }
 
-button, select {
-  padding: 8px;
-  border-radius: 6px;
+/* BUTTONS */
+button {
+  padding: 8px 12px;
+  margin-left: 5px;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
+  background: #00fff0;
+  color: black;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #00c9c0;
 }
 
 /* GRID */
@@ -43,22 +52,9 @@ button, select {
   padding: 20px;
   border-radius: 12px;
   border: 1px solid #333;
-  position: relative;
 }
 
-/* BADGE */
-.badge {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: gold;
-  color: black;
-  padding: 4px 8px;
-  font-size: 12px;
-  border-radius: 5px;
-}
-
-/* BUTTON */
+/* LINK */
 a {
   display: inline-block;
   margin-top: 10px;
@@ -75,37 +71,22 @@ a {
 
 <!-- TOP BAR -->
 <div class="topbar">
+
   <div id="title">Game Hub</div>
 
   <div>
-    <!-- LANGUAGE -->
-    <select onchange="setLang(this.value)">
-      <option value="en">EN</option>
-      <option value="it">IT</option>
-      <option value="fr">FR</option>
-      <option value="es">ES</option>
-      <option value="ms">MY</option>
-      <option value="zh">中文</option>
-    </select>
-
-    <!-- THEME -->
-    <button onclick="toggleTheme()">Theme</button>
-
-    <!-- SHARE -->
+    <!-- LANGUAGE BUTTON -->
+    <button onclick="switchLang()">🌐 Language</button>
     <button onclick="shareSite()">Share</button>
   </div>
+
 </div>
 
 <h2 id="subtitle">Choose a game</h2>
 
-<button onclick="suggestGame()">🎯 Suggest me a game</button>
-
-<div id="suggest"></div>
-
 <div class="container">
 
   <div class="game">
-    <div class="badge">HOT</div>
     <h3>Astro Cow Human Catcher</h3>
     <a href="https://tortino14.github.io/Astro---Cow-Human-Catcher/" target="_blank">Play</a>
   </div>
@@ -123,8 +104,13 @@ a {
 </div>
 
 <script>
-/* 🌐 TRANSLATIONS */
-const langData = {
+
+/* 🌐 LANGUAGES */
+const langs = ["en","it","fr","es","ms","zh"];
+let current = localStorage.getItem("lang") || "en";
+
+/* TEXTS */
+const data = {
   en: {title:"Game Hub", subtitle:"Choose a game"},
   it: {title:"Hub Giochi", subtitle:"Scegli un gioco"},
   fr: {title:"Hub de Jeux", subtitle:"Choisis un jeu"},
@@ -133,38 +119,32 @@ const langData = {
   zh: {title:"游戏中心", subtitle:"选择一个游戏"}
 };
 
-function setLang(lang){
-  document.getElementById("title").innerText = langData[lang].title;
-  document.getElementById("subtitle").innerText = langData[lang].subtitle;
+/* APPLY LANGUAGE */
+function applyLang(lang){
+  document.getElementById("title").innerText = data[lang].title;
+  document.getElementById("subtitle").innerText = data[lang].subtitle;
+  localStorage.setItem("lang", lang);
 }
 
-/* 🎯 SUGGEST GAME */
-function suggestGame(){
-  const games = ["Astro Cow Human Catcher","Astro Game","Astro Gravity"];
-  const pick = games[Math.floor(Math.random()*games.length)];
-  document.getElementById("suggest").innerText = "👉 Try: " + pick;
+/* SWITCH BUTTON */
+function switchLang(){
+  let index = langs.indexOf(current);
+  index = (index + 1) % langs.length;
+  current = langs[index];
+  applyLang(current);
 }
 
-/* 🎨 THEME */
-let dark = true;
-function toggleTheme(){
-  if(dark){
-    document.body.style.background = "#f2f2f2";
-    document.body.style.color = "black";
-  } else {
-    document.body.style.background = "#0a0a1a";
-    document.body.style.color = "white";
-  }
-  dark = !dark;
-}
-
-/* 📤 SHARE */
+/* SHARE */
 function shareSite(){
   navigator.share?.({
     title: "Game Hub",
     url: window.location.href
   }) || alert("Copy link: " + window.location.href);
 }
+
+/* LOAD SAVED LANGUAGE */
+applyLang(current);
+
 </script>
 
 </body>
